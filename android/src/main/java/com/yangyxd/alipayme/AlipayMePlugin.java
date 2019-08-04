@@ -177,7 +177,7 @@ public class AlipayMePlugin implements MethodCallHandler {
           // 返回
           AuthResult ar = new AuthResult(result, true);
 
-          Map map = new HashMap();
+          final Map map = new HashMap();
           map.put("openId", ar.getAlipayOpenId());
           map.put("authCode", ar.getAuthCode());
           map.put("memo", ar.getMemo());
