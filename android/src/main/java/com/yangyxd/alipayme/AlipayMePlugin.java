@@ -184,7 +184,15 @@ public class AlipayMePlugin implements MethodCallHandler {
           map.put("result", ar.getResult());
           map.put("resultCode", ar.getResultCode());
           map.put("status", ar.getResultStatus());
-          callback.success(map);
+          
+          if (currentActivity != null && !currentActivity.isFinishing()) {
+              currentActivity.runOnUiThread(new Runnable() {
+                  @Override
+                  public void run() {
+                    callback.success(map);
+                  }
+              });
+          }
         }  catch (Exception e) {
           callback.error(e.getMessage(),"授权发生错误", e);
         }
